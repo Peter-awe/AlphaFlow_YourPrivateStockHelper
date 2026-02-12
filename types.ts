@@ -1,7 +1,7 @@
 export interface MacroEvent {
   id: string;
   time: string;
-  source: 'Fed' | 'PBOC' | 'Reuters' | 'Bloomberg' | 'IMF';
+  source: 'Fed' | 'PBOC' | 'Reuters' | 'Bloomberg' | 'IMF' | '央行' | '统计局' | '证监会' | '发改委' | '财联社';
   title: string;
   impact: 'High' | 'Medium' | 'Low';
   sentiment: 'Hawkish' | 'Dovish' | 'Neutral' | 'Bullish' | 'Bearish';

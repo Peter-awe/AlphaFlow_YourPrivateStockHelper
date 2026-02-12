@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { sendDeepSeekMessage } from '../services/deepseekService';
+import { sendChatMessage } from '../services/deepseekService';
 import { ChatMessage } from '../types';
 import { SYSTEM_PROMPT } from '../constants';
 import { IconSend, IconBrain } from '../components/Icons';
@@ -9,7 +9,7 @@ const Insight: React.FC = () => {
     {
       id: 'init',
       role: 'assistant',
-      content: 'Hi there! I\'m your AlphaFlow AI Tutor. I can help you understand market trends, explain complex terms, or spot opportunities. What would you like to know today?',
+      content: '您好！我是您的 A 股 AI 投资顾问。我可以帮您分析个股、解读政策或判断大盘走势。今天想了解什么？',
       timestamp: Date.now()
     }
   ]);
@@ -38,7 +38,7 @@ const Insight: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const responseText = await sendDeepSeekMessage([...messages, userMsg], SYSTEM_PROMPT);
+      const responseText = await sendChatMessage([...messages, userMsg], SYSTEM_PROMPT);
       
       const aiMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
@@ -51,7 +51,7 @@ const Insight: React.FC = () => {
       const errorMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'system',
-        content: 'I had trouble connecting to the server. Please try again.',
+        content: '抱歉，连接服务器超时，请稍后再试。',
         timestamp: Date.now()
       };
       setMessages(prev => [...prev, errorMsg]);
@@ -76,15 +76,15 @@ const Insight: React.FC = () => {
              <IconBrain className="text-white w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-slate-100">AI Investment Tutor</h2>
-            <p className="text-xs text-indigo-400">Powered by DeepSeek V3</p>
+            <h2 className="text-lg font-bold text-slate-100">AI 投资顾问</h2>
+            <p className="text-xs text-indigo-400">Gemini 3 Pro 驱动</p>
           </div>
         </div>
         <button 
             className="text-xs text-slate-500 hover:text-slate-300"
             onClick={() => setMessages([messages[0]])}
         >
-            Clear Chat
+            清空对话
         </button>
       </div>
 
@@ -102,7 +102,7 @@ const Insight: React.FC = () => {
               }`}
             >
               {msg.role === 'assistant' && (
-                <div className="text-xs text-indigo-400 mb-1 font-bold">AlphaFlow Tutor</div>
+                <div className="text-xs text-indigo-400 mb-1 font-bold">AlphaFlow 顾问</div>
               )}
               {msg.content}
             </div>
@@ -127,7 +127,7 @@ const Insight: React.FC = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask anything! E.g., 'What is volatility?' or 'Is tech stock good today?'"
+            placeholder="问我任何问题！例如：“今天半导体板块为什么涨？” 或 “帮我分析 600519”"
             className="w-full bg-transparent text-slate-200 text-sm p-4 pr-12 outline-none resize-none max-h-32 min-h-[56px]"
             rows={1}
           />
@@ -141,7 +141,7 @@ const Insight: React.FC = () => {
         </div>
         <div className="text-center mt-2">
           <p className="text-[10px] text-slate-600">
-            AI can make mistakes. Always do your own research before investing.
+            AI 可能会犯错。投资有风险，决策需自主。
           </p>
         </div>
       </div>

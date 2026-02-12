@@ -8,11 +8,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) => {
   const menuItems = [
-    { id: 'dashboard', label: 'Overview', icon: IconDashboard }, // Was Dashboard
-    { id: 'macro', label: 'Global News', icon: IconGlobe }, // Was Macro Sentinel
-    { id: 'smartmoney', label: 'Money Flow', icon: IconTrendingUp }, // Was Smart Money
-    { id: 'volatility', label: 'Hot Picks', icon: IconActivity }, // Was Volatility Hunter
-    { id: 'insight', label: 'AI Tutor', icon: IconBrain }, // Was AlphaFlow AI
+    { id: 'dashboard', label: '市场总览', icon: IconDashboard },
+    { id: 'macro', label: '宏观前哨', icon: IconGlobe },
+    { id: 'smartmoney', label: '主力资金', icon: IconTrendingUp },
+    { id: 'volatility', label: '机会扫描', icon: IconActivity },
+    { id: 'insight', label: 'AI 投顾', icon: IconBrain },
   ];
 
   return (
@@ -45,12 +45,12 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) => {
 
       <div className="p-4 border-t border-slate-800">
         <div className="bg-slate-950 rounded-lg p-3 border border-slate-800">
-          <p className="text-xs text-slate-500 uppercase font-bold mb-1">Status</p>
+          <p className="text-xs text-slate-500 uppercase font-bold mb-1">系统状态</p>
           <div className="flex items-center text-xs text-emerald-400">
             <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
-            Online
+            A 股行情连线中
           </div>
-          <p className="text-xs text-slate-500 mt-2">Personal Edition</p>
+          <p className="text-xs text-slate-500 mt-2">个人尊享版 V2.0</p>
         </div>
       </div>
     </aside>
